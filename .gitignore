@@ -1,0 +1,9 @@
+# compiled classes
+bin/
+
+# runtime-generated data (each user/demo builds their own)
+data/*.txt
+
+# OS / editor junk
+.DS_Store
+*.class

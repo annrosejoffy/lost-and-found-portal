@@ -21,7 +21,7 @@ import java.util.*;
  * console and desktop GUI versions of this project.
  */
 public class WebServer {
-    private static final int PORT = 8080;
+    private static final int PORT = System.getenv("PORT") != null ? Integer.parseInt(System.getenv("PORT")) : 8080;
     private final DataStore store;
 
     public WebServer(DataStore store) { this.store = store; }

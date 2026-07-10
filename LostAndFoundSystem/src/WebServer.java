@@ -82,7 +82,7 @@ public class WebServer {
                 : lower.endsWith(".webp") ? "image/webp"
                 : "image/jpeg";
         ex.getResponseHeaders().set("Content-Type", contentType);
-        ex.getResponseHeaders().set("Cache-Control", "no-cache, must-revalidate");
+        ex.getResponseHeaders().set("Cache-Control", "public, max-age=31536000");
         ex.sendResponseHeaders(200, bytes.length);
         try (OutputStream os = ex.getResponseBody()) { os.write(bytes); }
     }

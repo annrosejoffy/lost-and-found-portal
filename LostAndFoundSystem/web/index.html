@@ -29,6 +29,7 @@
     padding: 18px 28px;
   }
   header h1 { margin: 0; font-size: 20px; font-weight: 600; }
+  header p { margin: 4px 0 0; font-size: 13px; opacity: 0.85; }
   nav.tabs {
     display: flex;
     background: #fff;
@@ -125,17 +126,10 @@
   .record-table { display: none; }
   .record-table.active { display: block; }
   .hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  .img-preview-wrap { display: flex; align-items: flex-end; gap: 12px; flex-wrap: wrap; }
   .img-preview {
     display: none; margin-top: 10px; max-width: 180px; max-height: 180px;
     object-fit: cover; border-radius: 8px; border: 1px solid var(--border);
   }
-  .btn-remove-img {
-    display: none; margin-top: 10px; background: #fff; color: var(--danger);
-    border: 1px solid var(--danger); border-radius: 6px; padding: 7px 14px;
-    font-size: 12px; cursor: pointer; font-weight: 600; height: fit-content;
-  }
-  .btn-remove-img:hover { background: #fbe9e7; }
   .thumb {
     width: 40px; height: 40px; object-fit: cover; border-radius: 4px;
     border: 1px solid var(--border); cursor: pointer; display: block;
@@ -166,6 +160,7 @@
 
 <header>
   <h1>Campus Lost and Found Management System</h1>
+  <p>Java (JDK HttpServer) backend &middot; HashMap / ArrayList / LinkedList &middot; linear &amp; binary search &middot; weighted matching</p>
 </header>
 
 <nav class="tabs">
@@ -196,10 +191,7 @@
         <div class="full">
           <label>Photo (optional)</label>
           <input type="file" id="lost-image-input" accept="image/*">
-          <div class="img-preview-wrap">
-            <img id="lost-image-preview" class="img-preview" alt="Preview">
-            <button type="button" id="lost-image-remove" class="btn-remove-img" onclick="resetImageField('lost')">Remove photo</button>
-          </div>
+          <img id="lost-image-preview" class="img-preview" alt="Preview">
         </div>
       </div>
       <div class="actions"><button class="btn" onclick="submitLost()">Register Lost Item</button></div>
@@ -225,10 +217,7 @@
         <div class="full">
           <label>Photo (optional)</label>
           <input type="file" id="found-image-input" accept="image/*">
-          <div class="img-preview-wrap">
-            <img id="found-image-preview" class="img-preview" alt="Preview">
-            <button type="button" id="found-image-remove" class="btn-remove-img" onclick="resetImageField('found')">Remove photo</button>
-          </div>
+          <img id="found-image-preview" class="img-preview" alt="Preview">
         </div>
       </div>
       <div class="actions"><button class="btn" onclick="submitFound()">Register Found Item</button></div>
@@ -438,7 +427,6 @@ document.getElementById('lost-image-input').addEventListener('change', async (e)
     const preview = document.getElementById('lost-image-preview');
     preview.src = lostImageData;
     preview.style.display = 'block';
-    document.getElementById('lost-image-remove').style.display = 'inline-block';
   } catch (err) { setStatus(err.message, true); }
 });
 
@@ -450,7 +438,6 @@ document.getElementById('found-image-input').addEventListener('change', async (e
     const preview = document.getElementById('found-image-preview');
     preview.src = foundImageData;
     preview.style.display = 'block';
-    document.getElementById('found-image-remove').style.display = 'inline-block';
   } catch (err) { setStatus(err.message, true); }
 });
 
@@ -460,7 +447,6 @@ function resetImageField(prefix) {
   const preview = document.getElementById(prefix + '-image-preview');
   preview.style.display = 'none';
   preview.src = '';
-  document.getElementById(prefix + '-image-remove').style.display = 'none';
 }
 
 // ---------- Report Lost ----------
